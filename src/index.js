@@ -1,6 +1,52 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
+import { formatPrice } from "./scripts/CurrencyFormat.js";
 
-console.log('Happy hacking :)')
+const baseUrl = "https://platzi-avo.vercel.app"
+const url= `${baseUrl}/api/avo`;
+
+const appNode = document.querySelector("#app");
+
+//web api
+window
+    .fetch(url)
+    .then((response)=>{
+        return response.json();
+    })
+    .then((resJson)=>{
+        const allAvocados = [];
+        const avocados = resJson.data;
+        avocados.forEach(item => {
+            //Creando los nodos
+            const container = document.createElement("div");
+            
+            const image = document.createElement("img");
+            image.src = `${baseUrl}${item.image}`;
+            image.className = "h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6"
+
+            const title = document.createElement("h2");
+            title.textContent = item.name;
+            title.className = "text-green-500";
+            title.classList.add("text-xl");
+
+            const price = document.createElement("div");
+            price.textContent = formatPrice(item.price);
+            price.className = 'text-gray-600'
+
+            //Wrap price & title
+            const priceAndTitle = document.createElement('div')
+            priceAndTitle.className = 'text-center md:text-left'
+            priceAndTitle.append(title, price)
+
+            //Wrap Img and priceAndTitle
+            const card = document.createElement('div')
+            card.className = "md:flex bg-white rounded-lg p-6 hover:bg-gray-300"
+            card.append(image, priceAndTitle)
+
+
+            allAvocados.push(card);
+
+            
+        });
+        
+        appNode.append(...allAvocados);
+    });
+ 

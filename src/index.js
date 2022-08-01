@@ -29,7 +29,7 @@ window
             title.className = "text-green-500";
             title.classList.add("text-xl");
             title.addEventListener('click', () =>{
-                window.alert("Holaaaaaa");
+                window.alert("Hola compra un aguacatito porfi");
             });
 
             //Precio

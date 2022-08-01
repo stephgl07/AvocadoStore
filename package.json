@@ -1,4 +1,5 @@
 {
+  "homepage": "https://stephgl07.github.io/AvocadoStore",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
